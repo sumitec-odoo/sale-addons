@@ -4,15 +4,15 @@
 {
     "name": "sale_order_quote_image",
     "summary": "",
-    "version": "15.0.1.0.0",
+    "version": "15.0.1.0.1",
     "category": "Sales",
     "website": "https://github.com/juanpgarza/sale-addons",
     "author": "juanpgarza",
     "license": "AGPL-3",
     "depends": ["sale"],
     "data": [
-        'views/sale_portal_templates.xml',
-        'views/sale_order_views.xml',      
-        ],
+        "views/sale_portal_templates.xml",
+        "views/sale_order_views.xml",
+    ],
     "installable": True,
 }
