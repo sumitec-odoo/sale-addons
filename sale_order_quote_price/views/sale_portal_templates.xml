@@ -2,14 +2,16 @@
 <odoo>
     <template id="sale_order_portal_content" inherit_id="sale.sale_order_portal_content">
         <xpath expr="//table[@id='sales_order_table']/thead/tr/th[3]" position="replace">
-            <t t-if="sale_order.print_image">
-                <th></th>
-            </t>
+            <th></th>
         </xpath>
+        <xpath expr="//table[@id='sales_order_table']/thead/tr/th[6]" position="replace">
+            <th></th>
+        </xpath>        
         <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[1]/td[3]" position="replace">
-            <t t-if="sale_order.print_image">
-                <td></td>
-            </t>
+            <td></td>
         </xpath>
+        <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[1]/td[6]" position="replace">
+            <td></td>
+        </xpath>    
     </template>
 </odoo>
