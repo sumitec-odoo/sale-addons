@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_order_portal_content" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//table[@id='sales_order_table']/thead/tr/th[3]" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_unit_price</attribute>
+        </xpath>
+        <xpath expr="//table[@id='sales_order_table']/thead/tr/th[6]" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_unit_price</attribute>
+        </xpath>        
+        <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[1]/td[3]" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_unit_price</attribute>
+        </xpath>
+        <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[1]/td[6]" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_unit_price</attribute>
+        </xpath>
+        <xpath expr="//div[@id='total']" position="before">
+            <table class="table table-sm" groups="sale_order_quote_ux.group_show_custom_footer">
+                <tr class="border-black o_subtotal">
+                    <br/>
+                    <br/>                    
+                    <td class="text-right">
+                        <strong>
+                        Total: 
+                        <span t-att-class="oe_subtotal_footer_separator" t-field="sale_order.amount_total" data-id="total_amount"/>
+                        <span> más IVA</span>
+                        </strong>
+                    </td>
+                </tr>
+            </table>
+            
+        </xpath>  
+        <xpath expr="//div[@id='total']" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_initial_footer_tax_detail</attribute>
+        </xpath>        
+        
+    </template>
+
+    <template id="sale_order_portal_template" inherit_id="sale.sale_order_portal_template">
+        <xpath expr="//b[@data-id='total_amount']" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_initial_total_price</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_download_pdf')]" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_download_print_quote</attribute>
+        </xpath>   
+    </template>
+
+    <!-- 
+        CUIDADO!
+        esto afecta también a las PO y las Facturas!!
+     -->
+    <!-- <template id="document_tax_totals" inherit_id="account.document_tax_totals">
+        <xpath expr="//t[@t-call='account.tax_groups_totals']" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_initial_total_price</attribute>
+        </xpath>
+        <xpath expr="//tr[hasclass('o_total')]" position="attributes">
+            <attribute name="groups">sale_order_quote_ux.group_show_initial_total_price</attribute>
+        </xpath> 
+    </template> -->
+
+</odoo>
