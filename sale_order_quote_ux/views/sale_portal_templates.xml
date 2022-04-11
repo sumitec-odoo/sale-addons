@@ -29,9 +29,9 @@
             </table>
             
         </xpath>  
-        <!-- <xpath expr="//div[@id='total']" position="attributes">
+        <xpath expr="//div[@id='total']" position="attributes">
             <attribute name="groups">sale_order_quote_ux.group_show_initial_footer_tax_detail</attribute>
-        </xpath>         -->
+        </xpath>
         
     </template>
 
