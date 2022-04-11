@@ -14,7 +14,7 @@
             <attribute name="groups">sale_order_quote_ux.group_show_unit_price</attribute>
         </xpath>
         <xpath expr="//div[@id='total']" position="before">
-            <table class="table table-sm" groups="sale_order_quote_ux.group_show_custom_footer">
+            <table class="table table-sm">
                 <tr class="border-black o_subtotal">
                     <br/>
                     <br/>                    
@@ -29,9 +29,9 @@
             </table>
             
         </xpath>  
-        <xpath expr="//div[@id='total']" position="attributes">
+        <!-- <xpath expr="//div[@id='total']" position="attributes">
             <attribute name="groups">sale_order_quote_ux.group_show_initial_footer_tax_detail</attribute>
-        </xpath>        
+        </xpath>         -->
         
     </template>
 
