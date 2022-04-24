@@ -20,8 +20,8 @@
                     <br/>                    
                     <td class="text-right">
                         <strong>
-                        Total: 
-                        <span t-att-class="oe_subtotal_footer_separator" t-field="sale_order.amount_total" data-id="total_amount"/>
+                        TOTAL, DE CONTADO: 
+                        <span t-att-class="oe_subtotal_footer_separator" t-field="sale_order.amount_untaxed" data-id="total_amount"/>
                         <span> más IVA</span>
                         </strong>
                     </td>
