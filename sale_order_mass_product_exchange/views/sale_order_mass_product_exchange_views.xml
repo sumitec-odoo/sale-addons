@@ -1,0 +1,82 @@
+<odoo>
+<!-- 
+    Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+-->
+  <data>
+
+    <record id="view_sale_order_mass_product_exchange_form" model="ir.ui.view">
+        <field name="name">sale.order.mass.product.exchange.form.view</field>
+        <field name="model">sale.order.mass.product.exchange</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false" edit="false">
+                <header>
+                    
+                </header>
+                
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="user_id"/>                        
+                        <field name="rem_product_id"/>
+                        <field name="add_product_id"/>
+
+                        <field name="mass_product_exchange_line_ids">
+                            <tree string="Pedidos">
+                                <field name="sale_order_id" />
+                                <field name="sale_order_partner_id" />                                
+                                <field name="sale_order_state" />
+                                <field name="sale_order_invoice_status" />                                
+                            </tree>
+                        </field>
+                       
+                    </group>
+                    <group>
+                        <button
+                        name="facturar_action"
+                        class="btn-primary"
+                        style="margin:12px 0px 12px 0px;"
+                        confirm="Está seguro que desea continuar?"
+                        string="Facturar"
+                        type="object"/> 
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity"/>                    
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sale_order_mass_product_exchange_tree" model="ir.ui.view">
+        <field name="name">sale.order.mass.product.exchange.tree.view</field>
+        <field name="model">sale.order.mass.product.exchange</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" edit="false">
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="rem_product_id"/>
+                <field name="add_product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_order_mass_product_exchange_action" model="ir.actions.act_window">
+        <!-- <field name="name">Sesiones de caja</field> -->
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.mass.product.exchange</field>
+        <!-- <field name="context">{'search_default_sesiones_iniciadas_hoy': True}</field> -->
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record> 
+
+    <menuitem id="menu_pop_config" 
+    parent="sale.sale_order_menu"
+    action="sale_order_mass_product_exchange_action"
+    sequence="100"
+    groups="sales_team.group_sale_manager"/>
+    
+  </data>
+</odoo>
