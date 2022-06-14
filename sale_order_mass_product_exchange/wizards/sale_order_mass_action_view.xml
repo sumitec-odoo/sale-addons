@@ -13,7 +13,6 @@
                     <field name="dest_product_ids" invisible="1" />
                     <field name="rem_product_id" />
                     <field name="add_product_id" domain="[('id','in',dest_product_ids)]"/>                    
-                    <field name="confirm" />
                 </group>
                 <footer>
                     <button

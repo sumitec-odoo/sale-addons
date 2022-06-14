@@ -7,7 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 class SaleOrderMpeProductSrc(models.Model):
     _name = 'sale.order.mpe.product.src'
     # _order = 'id desc'
-    _description = 'Productos Intercambiables'
+    _description = 'Productos Intercambiables - Origen'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = "src_product_id"
 

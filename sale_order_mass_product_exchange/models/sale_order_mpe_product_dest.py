@@ -7,7 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 class SaleOrderMpeProductDest(models.Model):
     _name = 'sale.order.mpe.product.dest'
     _order = 'id desc'
-    # _description = 'Cambio masivo de producto'
+    _description = 'Productos Intercambiables - Origen'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = "dest_product_id"
 
