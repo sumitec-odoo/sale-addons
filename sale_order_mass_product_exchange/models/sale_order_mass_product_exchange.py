@@ -28,7 +28,5 @@ class SaleOrderMassProductExchange(models.Model):
         # import pdb; pdb.set_trace()
 
         wiz = self.env['sale.advance.payment.inv'].with_context(active_ids=self.mass_product_exchange_line_ids.mapped("sale_order_id").ids, open_invoices=True).create({})
-        # res = wiz.create_invoices()
 
-        # return wiz.create_invoices()
-        return wiz
+        return wiz.create_invoices()

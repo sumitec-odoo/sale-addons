@@ -10,7 +10,7 @@
             name="model_id"
             ref="sale_order_mass_product_exchange.model_sale_order_mass_action_wizard"
         />
-        <field name="group_id" ref="sales_team.group_sale_salesman" />
+        <field name="group_id" ref="base.group_user" />
         <field name="perm_read" eval="1" />
         <field name="perm_create" eval="1" />
         <field name="perm_write" eval="1" />
