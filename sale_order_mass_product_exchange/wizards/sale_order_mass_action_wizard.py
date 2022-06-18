@@ -40,10 +40,10 @@ class SaleOrderMassActionWizard(models.TransientModel):
                 'add_product_id': wizard.add_product_id.id,
                 'user_id': self.env.uid,
             }
-            new_mpe = mass_product_exchange.create(vals)
+            new_mpe = mass_product_exchange.sudo().create(vals)
 
             sale_orders = sale_order_obj.search(wizard._get_sale_order_confirm_domain())
-            sale_orders.product_exchange(new_mpe,wizard.rem_product_id, wizard.add_product_id)
+            sale_orders.sudo().product_exchange(new_mpe,wizard.rem_product_id, wizard.add_product_id)
             # sale_orders.action_confirm()
             # self._notify_success(sale_orders)
         return True

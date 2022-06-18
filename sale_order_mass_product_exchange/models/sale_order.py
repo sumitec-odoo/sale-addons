@@ -31,13 +31,13 @@ class SaleOrder(models.Model):
                         "price_unit": price_unit,
                         }
 
-                self.env["sale.order.line"].create(vals)
+                self.env["sale.order.line"].sudo().create(vals)
                 producto_cambiado = True
 
             if producto_cambiado:
                 vals_mpel["sale_order_id"] = rec.id
 
-                mass_product_exchange_line_id.create(vals_mpel)
+                mass_product_exchange_line_id.sudo().create(vals_mpel)
             else:
                 raise UserError("No se realizó ningún cambio en el pedido {}".format(rec.name))
 

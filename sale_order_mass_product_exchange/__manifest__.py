@@ -19,5 +19,6 @@
         "views/sale_order_mass_product_exchange_views.xml",
         "views/sale_order_mpe_product_src_views.xml",        
         "wizards/sale_order_mass_action_view.xml",
+        "views/menu_views.xml",        
     ],
 }

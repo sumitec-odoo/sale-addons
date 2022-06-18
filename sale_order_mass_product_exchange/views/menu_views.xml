@@ -1,0 +1,55 @@
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+      <data>
+
+        <!-- 
+            Productos Intercambiables 
+        -->
+
+        <record id="sale_order_mpe_product_src_action" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.mpe.product.src</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem id="menu_sale_order_mpe_product_src" 
+        parent="sale.sale_order_menu"
+        action="sale_order_mpe_product_src_action"
+        sequence="100"
+        groups="sale_order_mass_product_exchange.group_sale_order_mpe_manager"/>
+
+        <!-- 
+            Cambios de Productos 
+        -->
+        <record id="sale_order_mass_product_exchange_action" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.mass.product.exchange</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <menuitem id="menu_sale_order_mass_product_exchange" 
+        parent="sale.sale_order_menu"
+        action="sale_order_mass_product_exchange_action"
+        sequence="100"
+        groups="sale_order_mass_product_exchange.group_sale_order_mpe_manager"/>
+
+        <!--  
+            Sub menú de acción del pedido: Cambio de producto
+
+        -->
+        <record id="action_sale_order_mass_action" model="ir.actions.act_window">
+            <field name="name">Cambio de producto</field>
+            <field name="res_model">sale.order.mass.action.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="groups_id" eval="[(4, ref('sale_order_mass_product_exchange.group_sale_order_mpe_user'))]"/>
+        </record>
+
+      </data>
+</odoo>    
