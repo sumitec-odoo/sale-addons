@@ -20,6 +20,7 @@
                         <field name="user_id"/>                        
                         <field name="rem_product_id"/>
                         <field name="add_product_id"/>
+                        <field name="quantity"/>
 
                         <field name="mass_product_exchange_line_ids">
                             <tree string="Pedidos">

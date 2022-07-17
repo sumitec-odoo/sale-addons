@@ -24,6 +24,8 @@ class SaleOrderMassProductExchange(models.Model):
 
     mass_product_exchange_line_ids = fields.One2many('sale.order.mass.product.exchange.line', 'mass_product_exchange_id', string='Pedidos modificados')
 
+    quantity = fields.Float('Cantidad')
+
     def facturar_action(self):
         # import pdb; pdb.set_trace()
 

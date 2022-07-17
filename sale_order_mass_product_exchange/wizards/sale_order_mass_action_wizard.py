@@ -23,6 +23,8 @@ class SaleOrderMassActionWizard(models.TransientModel):
 
     dest_product_ids = fields.One2many("product.product", compute="_compute_dest_product_ids")
 
+    quantity = fields.Float('Cantidad')
+
     def _get_sale_order_confirm_domain(self):
         return [
             ("id", "in", self.env.context.get("active_ids")),
@@ -32,18 +34,22 @@ class SaleOrderMassActionWizard(models.TransientModel):
     def apply_button(self):
         sale_order_obj = self.env["sale.order"]
         if self.env.context.get("active_model") != "sale.order":
-            return
+            return      
         mass_product_exchange = self.env["sale.order.mass.product.exchange"]
         for wizard in self:
+            if wizard.quantity <= 0:
+                raise UserError("La cantidad debe ser mayor a cero")
+
             vals = {
                 'rem_product_id': wizard.rem_product_id.id,
                 'add_product_id': wizard.add_product_id.id,
+                'quantity': wizard.quantity,
                 'user_id': self.env.uid,
             }
             new_mpe = mass_product_exchange.sudo().create(vals)
 
             sale_orders = sale_order_obj.search(wizard._get_sale_order_confirm_domain())
-            sale_orders.sudo().product_exchange(new_mpe,wizard.rem_product_id, wizard.add_product_id)
+            sale_orders.sudo().product_exchange(new_mpe,wizard.rem_product_id, wizard.add_product_id,wizard.quantity)
             # sale_orders.action_confirm()
             # self._notify_success(sale_orders)
         return True

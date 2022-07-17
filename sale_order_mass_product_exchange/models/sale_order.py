@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    def product_exchange(self, mass_product_exchange_id, rem_product_id, add_product_id):
+    def product_exchange(self, mass_product_exchange_id, rem_product_id, add_product_id, quantity):
 
         mass_product_exchange_line_id = self.env["sale.order.mass.product.exchange.line"]
 
@@ -17,16 +17,18 @@ class SaleOrder(models.Model):
         for rec in self:
             producto_cambiado = False
             for line in rec.order_line.filtered(lambda x: x.product_id.id == rem_product_id.id and x.product_uom_qty > 0):
-                product_qty = line.product_uom_qty
                 price_unit = line.price_unit
                 
-                line.product_uom_qty = 0
+                if quantity > line.product_uom_qty:
+                    raise UserError("La cantidad que se desea cambiar supera a la cantidad pedida en {}".format(rec.name))
+
+                line.product_uom_qty = line.product_uom_qty - quantity
 
                 vals = {
                         "order_id": rec.id,
                         "name": add_product_id.name,
                         "product_id": add_product_id.id,
-                        "product_uom_qty": product_qty,
+                        "product_uom_qty": quantity,
                         "product_uom": add_product_id.uom_id.id,
                         "price_unit": price_unit,
                         }
