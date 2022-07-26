@@ -49,6 +49,8 @@ class SaleOrderMassActionWizard(models.TransientModel):
             new_mpe = mass_product_exchange.sudo().create(vals)
 
             sale_orders = sale_order_obj.search(wizard._get_sale_order_confirm_domain())
+            if not sale_orders:
+                raise UserError("No seleccionó ningún pedido de venta. FUNCION no habilitada para presupuestos")
             sale_orders.sudo().product_exchange(new_mpe,wizard.rem_product_id, wizard.add_product_id,wizard.quantity)
             # sale_orders.action_confirm()
             # self._notify_success(sale_orders)

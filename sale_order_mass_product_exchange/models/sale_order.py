@@ -15,32 +15,46 @@ class SaleOrder(models.Model):
             'sale_order_id': 0,
         }
         for rec in self:
-            producto_cambiado = False
-            for line in rec.order_line.filtered(lambda x: x.product_id.id == rem_product_id.id and x.product_uom_qty > 0):
-                price_unit = line.price_unit
-                
-                if quantity > line.product_uom_qty:
-                    raise UserError("La cantidad que se desea cambiar supera a la cantidad pedida en {}".format(rec.name))
-
-                line.product_uom_qty = line.product_uom_qty - quantity
-
+            # producto_cambiado = False
+            order_line_rem_ids = rec.order_line.filtered(lambda x: x.product_id.id == rem_product_id.id and x.product_uom_qty > 0)
+            total_qty = sum(order_line_rem_ids.mapped("product_uom_qty"))
+            if quantity > total_qty:
+                raise UserError("La cantidad que se desea cambiar ({}) supera a la cantidad pedida ({}) en {}".format(quantity,total_qty,rec.name))
+                        
+            order_line_add_ids = rec.order_line.filtered(lambda x: x.product_id.id == add_product_id.id)
+            if not order_line_add_ids:
+                # si no existe un renglón para el producto agregado, lo creo
                 vals = {
                         "order_id": rec.id,
                         "name": add_product_id.name,
                         "product_id": add_product_id.id,
                         "product_uom_qty": quantity,
                         "product_uom": add_product_id.uom_id.id,
-                        "price_unit": price_unit,
+                        "price_unit": order_line_rem_ids[0].price_unit,
                         }
 
-                self.env["sale.order.line"].sudo().create(vals)
-                producto_cambiado = True
-
-            if producto_cambiado:
-                vals_mpel["sale_order_id"] = rec.id
-
-                mass_product_exchange_line_id.sudo().create(vals_mpel)
+                order_line_add_ids = self.env["sale.order.line"].sudo().create(vals)
             else:
-                raise UserError("No se realizó ningún cambio en el pedido {}".format(rec.name))
+                # si existe, lo actualizo
+                order_line_add_ids[0].product_uom_qty += quantity
 
-        return producto_cambiado
+            qty_to_exchange = quantity
+            for line in order_line_rem_ids:
+                price_unit = line.price_unit
+                
+                if qty_to_exchange > line.product_uom_qty: 
+                    # tiene que continuar el bucle hasta que qty_to_exchanged = 0
+                    # que no quede nada para intercambiar
+                    qty_to_exchange = qty_to_exchange - line.product_uom_qty
+                    line.product_uom_qty = 0
+                else:
+                    # cant a intercambiar es menor que la cant de la línea.
+                    # no hay más que intercambiar. finaliza el bucle
+                    line.product_uom_qty = line.product_uom_qty - qty_to_exchange
+                    break
+
+            vals_mpel["sale_order_id"] = rec.id
+
+            mass_product_exchange_line_id.sudo().create(vals_mpel)
+
+        return True
