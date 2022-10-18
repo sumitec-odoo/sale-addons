@@ -4,9 +4,10 @@
 {
     "name": "sale_product_multi_add_ux",
     "summary": "",
-    "version": "12.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Sales",
     "website": "https://github.com/juanpgarza/sale-addons",
+    'license': 'AGPL-3',    
     "author": "juanpgarza",
     "depends": [
             "sale",
@@ -15,5 +16,5 @@
     "data": [
         'views/sale_import_products_view.xml',        
         ],
-    "installable": False,
+    "installable": True,
 }
