@@ -24,7 +24,6 @@ class SaleOrder(models.Model):
         res.append('definicion_nivel')
         return res
 
-    @api.multi
     def restart_validation(self):
         super(SaleOrder,self).restart_validation()
         for rec in self:
