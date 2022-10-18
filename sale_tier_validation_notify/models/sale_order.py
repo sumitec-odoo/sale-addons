@@ -16,11 +16,10 @@ class SaleOrder(models.Model):
                 'res_partner_id':self.user_requesting_review.partner_id.id}))        
         self.message_post(
             body='Se aprobo su pedido de revisión!', 
-            message_type='notification', 
-            subtype='mail.mt_comment',
+            message_type='notification',
+            subtype_xmlid="mail.mt_comment",
             notification_ids=notification_ids)
 
-    @api.multi
     def request_validation(self):
         self.user_requesting_review = self.env.user
         super(SaleOrder,self).request_validation()

@@ -2,15 +2,18 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "sale_tier_validation",
+    "name": "sale_tier_validation_notify",
     "summary": "",
-    "version": "12.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Social",
     "website": "https://github.com/juanpgarza/sale-addons",
     "author": "juanpgarza",
     "license": "AGPL-3",
-    "depends": ["mail","sale_tier_validation"],
+    "depends": [
+            "mail",
+            "sale_tier_validation",
+        ],
     "data": [
         ],
-    "installable": False,
+    "installable": True,
 }
