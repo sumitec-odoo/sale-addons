@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sale_order_portal_content_ux" name="Website Description 2" inherit_id="sale.sale_order_portal_content">
+
+        <xpath expr="//section[@id='terms']" position="after">
+            <div t-field="sale_order.website_description_2" class="oe_no_empty"/>
+        </xpath>
+
+    </template> 
+
+    <template id="so_template_ux" name="Website Description 2" inherit_id="sale_quotation_builder.so_template">
+
+        <xpath expr="//section[@id='terms']" position="after">
+            <div id="template_introduction_2" t-field="template.website_description_2" class="oe_no_empty"/>
+        </xpath>
+
+    </template>
+
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="note" position="after">
+                <field name="website_description" invisible="1"/>
+                <field name="website_description_2" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>
