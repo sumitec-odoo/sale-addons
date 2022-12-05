@@ -14,7 +14,7 @@ class SaleOrder(models.Model):
         super(SaleOrder,self)._validate_tier()
         self.review_done_by_users = ', '.join(self.review_ids.mapped("done_by.name"))
         self.definicion_nivel = ', '.join(self.review_ids.mapped("definition_id.name"))
-        # import pdb; pdb.set_trace()        
+        # import pdb; pdb.set_trace()
 
     @api.model
     def _get_under_validation_exceptions(self):
@@ -29,3 +29,32 @@ class SaleOrder(models.Model):
         for rec in self:
             rec.review_done_by_users = False
             rec.definicion_nivel = False
+
+    # Se utiliza en validacion de nivel
+    # Algunos de los precios unitarios no coincide con la lista de precio
+    # Porque se modificó o porque el presupuesto quedó desactualizado
+    def precio_correcto(self):
+        for order in self:
+            incorrect_line = ""
+            numero_linea = 0
+            for line in order.order_line:
+                numero_linea += 1
+                correct_price = self.env['product.product'].browse(line.product_id.id).with_context(pricelist=order.pricelist_id.id).price
+                if round(line.price_unit) != round(correct_price):
+                    # TODO:
+                    incorrect_line += str(numero_linea) + ", "
+
+            if incorrect_line:
+                notification_ids = []
+                notification_ids.append((0,0,{
+                    'res_partner_id': order.user_id.partner_id.id}))
+
+                order.message_post(
+                body="Líneas con precio incorrecto: {}".format(incorrect_line),
+                message_type='notification',
+                subtype_xmlid="mail.mt_comment",
+                notification_ids=notification_ids)
+
+                return False
+            else:
+                return True
