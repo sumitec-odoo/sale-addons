@@ -33,7 +33,7 @@ class SaleOrder(models.Model):
     # Se utiliza en validacion de nivel
     # Algunos de los precios unitarios no coincide con la lista de precio
     # Porque se modificó o porque el presupuesto quedó desactualizado
-    def precio_correcto(self):
+    def correct_price(self):
         for order in self:
             incorrect_line = ""
             numero_linea = 0
@@ -58,3 +58,14 @@ class SaleOrder(models.Model):
                 return False
             else:
                 return True
+
+    # lo uso en una validación de nivel de tipo Fórmula.
+    # el código para controlar la fecha de vencimiento es: not rec.valid_quotation()
+    def valid_quotation(self):
+        for rec in self:
+            delta = rec.validity_date - fields.Date.context_today(self)
+
+            if delta.days >= 0:
+                return True
+            else:
+                return False
