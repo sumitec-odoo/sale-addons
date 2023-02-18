@@ -8,6 +8,7 @@
     "category": "Sales",
     "website": "https://github.com/juanpgarza/sale-addons",
     "author": "juanpgarza",
+    "license": "AGPL-3",
     "depends": ["sale_coupon"],
     "data": [
         ],
