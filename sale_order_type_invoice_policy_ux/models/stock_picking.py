@@ -18,7 +18,7 @@ class StockPicking(models.Model):
 
         # que no tenga en cuenta las NC ni las facturas canceladas
         invoice_status = []
-        for invoice in self.sale_id.invoice_ids.filtered(lambda x: x.type == 'out_invoice'):
+        for invoice in self.sale_id.invoice_ids.filtered(lambda x: x.move_type == 'out_invoice'):
             invoice_status.append(invoice.state)
 
         # IMPORTANTE: que contemple las devoluciones de productos (qty_returned)
