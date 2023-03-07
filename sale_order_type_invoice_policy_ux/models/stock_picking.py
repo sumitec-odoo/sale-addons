@@ -21,10 +21,9 @@ class StockPicking(models.Model):
         for invoice in self.sale_id.invoice_ids.filtered(lambda x: x.move_type == 'out_invoice'):
             invoice_status.append(invoice.state)
 
-        # IMPORTANTE: que contemple las devoluciones de productos (qty_returned)
         if (set(invoice_status) - set(['paid','cancel'])) or any(
                 (float_compare(line.product_uom_qty,
-                               line.qty_invoiced + line.qty_returned,
+                               line.qty_invoiced,
                                precision_digits=precision) > 0)
                 for line in self.sale_id.order_line):
             return False
