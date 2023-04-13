@@ -7,4 +7,5 @@ class SaleOrderLine(models.Model):
     def _compute_margin(self):
         super(SaleOrderLine,self)._compute_margin()
         for line in self:
-            line.margin_percent = line.purchase_price and line.margin/line.purchase_price
+            costo_total = line.price_subtotal - line.margin
+            line.margin_percent = costo_total and line.margin/costo_total
