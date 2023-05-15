@@ -8,5 +8,6 @@ class SaleOrder(models.Model):
 
     print_image = fields.Boolean(
         "Imprimir imagen",
+        default=True,
         help="Si está tildado, se muestran las imagenes de los productos en el presupuesto Web",
     )
