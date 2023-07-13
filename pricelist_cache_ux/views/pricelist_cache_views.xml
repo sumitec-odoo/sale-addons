@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pricelist_cache_view_pivot" model="ir.ui.view">
+        <field name="name">product.pricelist.cache.view.pivot</field>
+        <field name="model">product.pricelist.cache</field>
+        <field name="arch" type="xml">
+            <pivot string="" sample="1">
+                <field name="price" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_pricelist_cache">
+        <field name="name">Tarifas (cache)</field>
+        <field name="res_model">product.pricelist.cache</field>
+        <field name="view_mode">tree,pivot</field>
+        <!--
+        <field name="domain">['|', ('type','=','lead'), ('type','=',False)]</field>
+        <field name="search_view_id" ref="crm.view_crm_case_leads_filter"/>
+        <field name="context">{
+                'default_type':'lead',
+                'search_default_type': 'lead',
+                'search_default_to_process':1,
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Lead
+            </p><p>
+                Leads are the qualification step before the creation of an opportunity.
+            </p>
+        </field> -->
+    </record>
+
+    <record id="pricelist_cache_all_view_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="4"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="pricelist_cache_view_pivot"/>
+        <field name="act_window_id" ref="action_pricelist_cache"/>
+    </record>
+
+    <menuitem
+        id="menu_pricelist_cache"
+        name="Tarifas (Cache)"
+        parent="sale.product_menu_catalog"
+        action="pricelist_cache_ux.action_pricelist_cache"
+        sequence="1"/>
+
+</odoo>
