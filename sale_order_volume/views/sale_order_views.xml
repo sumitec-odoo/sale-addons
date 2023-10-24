@@ -6,13 +6,13 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <field name="commitment_date" position="after">
+            <xpath expr="//group[@name='sale_shipping']/div[1]" position="after">                
                 <label for="volume" string="Volumen total"/>
                 <div class="o_row" name="volume">
                     <field name="volume" string="Volume"/>
                     <span>m³</span>
                 </div>
-            </field>
+            </xpath>
         </field>
     </record>
 
