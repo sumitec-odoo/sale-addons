@@ -6,7 +6,9 @@ class SaleOrder(models.Model):
     @api.depends('order_line.margin', 'amount_untaxed')
     def _compute_margin(self):
         super(SaleOrder,self)._compute_margin()
-        for order in self:
-            costo_total = order.amount_untaxed - order.margin
+        for order in self:            
+            costo_total = 0
+            for line in order.order_line.filtered(lambda r: r.state != 'cancel' and not r.excluir_markup):
+                costo_total += line.purchase_price * line.product_uom_qty
             order.margin_percent = costo_total and order.margin/costo_total
 
