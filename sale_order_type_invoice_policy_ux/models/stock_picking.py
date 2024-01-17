@@ -16,7 +16,7 @@ class StockPicking(models.Model):
             'Product Unit of Measure')
         invoice_status = self.sale_id.mapped(
             'order_line.invoice_lines.move_id').filtered(lambda x: x.move_type == 'out_invoice' and x.state != 'cancel').mapped('payment_state')
-        if (set(invoice_status) - set(['paid', 'in_payment'])) or any(
+        if (set(invoice_status) - set(['paid', 'in_payment', 'reversed'])) or any(
                 not float_is_zero(line.qty_to_invoice, precision_digits=precision)
                 for line in self.sale_id.order_line):
             return False
