@@ -16,5 +16,5 @@
     "data": [
         'views/sale_import_products_view.xml',        
         ],
-    "installable": True,
+    "installable": False,
 }

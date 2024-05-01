@@ -16,5 +16,5 @@
         'views/sale_portal_templates.xml',
         'security/sale_order_quote_security.xml',
         ],
-    "installable": True,
+    "installable": False,
 }

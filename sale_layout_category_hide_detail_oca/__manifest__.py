@@ -19,7 +19,7 @@
         "views/sale_portal_templates.xml",
     ],
     "application": False,
-    "installable": True,
+    "installable": False,
     'assets': {
         'web.assets_backend': [
             'sale_layout_category_hide_detail_oca/static/src/js/boolean_fa_icon_widget.js',

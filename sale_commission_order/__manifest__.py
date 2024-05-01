@@ -24,5 +24,5 @@
         'views/sale_order_view.xml',
         # 'views/templates.xml',        
     ],
-    'installable': True,
+    'installable': False,
 }

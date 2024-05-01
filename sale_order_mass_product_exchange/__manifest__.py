@@ -21,4 +21,5 @@
         "wizards/sale_order_mass_action_view.xml",
         "views/menu_views.xml",        
     ],
+    "installable": False,
 }

@@ -16,5 +16,5 @@
     "data": [
         'views/sale_portal_templates.xml',
         ],
-    "installable": True,
+    "installable": False,
 }

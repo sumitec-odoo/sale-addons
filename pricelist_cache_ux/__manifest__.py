@@ -16,5 +16,5 @@
     "data": [
         'views/pricelist_cache_views.xml',
         ],
-    "installable": True,
+    "installable": False,
 }
