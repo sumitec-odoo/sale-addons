@@ -4,9 +4,9 @@
 {
     "name": "sale_order_quote_image",
     "summary": "",
-    "version": "15.0.1.0.1",
+    "version": "17.0.1.0.0",
     "category": "Sales",
-    "website": "https://github.com/juanpgarza/sale-addons",
+    "website": "https://github.com/sumitec-odoo/sale-addons",
     "author": "juanpgarza",
     "license": "AGPL-3",
     "depends": ["sale"],
@@ -14,5 +14,5 @@
         "views/sale_portal_templates.xml",
         "views/sale_order_views.xml",
     ],
-    "installable": False,
+    "installable": True,
 }

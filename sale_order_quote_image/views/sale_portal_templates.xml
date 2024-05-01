@@ -10,7 +10,7 @@
             </t>
         </xpath>
         <xpath
-      expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[1]/td[1]"
+      expr="//table[@id='sales_order_table']/tbody/t[3]/tr[1]/t[1]/td[1]"
       position="before"
     >
             <t t-if="sale_order.print_image">
