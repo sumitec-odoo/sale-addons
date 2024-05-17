@@ -4,7 +4,7 @@
 {
     "name": "sale_order_quote_image",
     "summary": "",
-    "version": "17.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Sales",
     "website": "https://github.com/sumitec-odoo/sale-addons",
     "author": "juanpgarza",
@@ -14,5 +14,5 @@
         "views/sale_portal_templates.xml",
         "views/sale_order_views.xml",
     ],
-    "installable": False,
+    "installable": True,
 }
